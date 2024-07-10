@@ -1,15 +1,14 @@
 import {useParams} from "react-router-dom";
 import {useEffect} from "react";
-import {RootState, useAppDispatch} from "../../shared/redux/store.ts";
+import { useAppDispatch, useAppSelector} from "../../shared/redux";
 import fetchCharacter from "./api/fetchCharacter.ts";
-import {useSelector} from "react-redux";
 import {Loading,Error,CardTable} from "../../shared/ui";
-import {STATUS} from "../../shared/enums/status.ts";
+import {STATUS} from "../../shared/enums";
 
 export const InfoPage = () => {
     const {id} = useParams()
     const dispatch = useAppDispatch()
-    const { card, status, error } = useSelector((state: RootState) => state.character);
+    const { card, status, error } = useAppSelector((state) => state.character);
 
     useEffect(() => {
         dispatch(fetchCharacter(id))

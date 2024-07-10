@@ -1,22 +1,22 @@
 import React from 'react';
 import { Card as MUICard, CardContent, CardActions, Button, Typography } from '@mui/material';
 import { styled } from '@mui/system';
-import {CharacterCardProps} from "../../../types/types.ts";
+import {CharacterCardProps} from "../../../types";
 import {Link} from "react-router-dom";
 import {details} from "../lib/consts.ts";
 
 const StyledCard = styled(MUICard)`
-  background-color: #7e7863; // swGray
+  background-color: #7e7863; 
   color: white;
   margin: 16px;
   max-width: 300px;
 `;
 
 const StyledButton = styled(Button)`
-  background-color: #ad7d37; // swGold
+  background-color: #ad7d37; 
   color: white;
   &:hover {
-    background-color: #8a642b; // darker shade of swGold
+    background-color: #8a642b; 
   }
 `;
 

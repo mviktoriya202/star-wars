@@ -2,7 +2,7 @@ import React, { ChangeEvent, useState } from 'react';
 import {
     Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper, TextField, Button
 } from '@mui/material';
-import { CardType } from "../../../types/types.ts";
+import { CardType } from "../../../types";
 import {getCardsDataFromLocalStorage, formatDate, formatValue} from "../../../utils";
 
 interface CardTableProps extends CardType {
@@ -10,6 +10,10 @@ interface CardTableProps extends CardType {
     disabledFields: string[];
     arrayFields: string[];
     dateFields: string[];
+}
+interface ICell {
+    key: keyof CardType,
+    value: string | string[]
 }
 
 export const CardTable: React.FC<CardTableProps> = ({ disabledFields, dateFields, arrayFields, ...props }) => {
@@ -44,11 +48,11 @@ export const CardTable: React.FC<CardTableProps> = ({ disabledFields, dateFields
         setIsEditing(false);
     };
 
-    const formatCellValue = (key: keyof CardType, value: string | string[]): string => {
+    const formatCellValue = ({key, value}:ICell): string => {
         if (dateFields.includes(key) && typeof value === 'string') {
             return formatDate(value);
         } else if (arrayFields.includes(key)) {
-            formatValue(key as keyof CardType, value,arrayFields)
+            formatValue({key, value, arrayFields})
         }
         return value.toString();
     };
@@ -78,7 +82,7 @@ export const CardTable: React.FC<CardTableProps> = ({ disabledFields, dateFields
                                             disabled={isFieldDisabled}
                                         />
                                     ) : (
-                                        formatCellValue(key as keyof CardType, data[key as keyof CardType])
+                                        formatCellValue({key:key as keyof CardType, value:data[key as keyof CardType]})
                                     )}
                                 </TableCell>
                             </TableRow>

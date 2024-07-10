@@ -1,15 +1,14 @@
-import {InitialsType} from "../../../shared/types/types.ts";
+import {ICardContainer} from "../../../shared/types";
 import {Box, Pagination, Typography} from "@mui/material";
-import {RootState, useAppDispatch} from "../../../shared/redux/store.ts";
-import {useSelector} from "react-redux";
+import { useAppDispatch, useAppSelector} from "../../../shared/redux";
 import {ChangeEvent} from "react";
 import {Loading,Error,Card} from "../../../shared/ui";
+import {STATUS} from "../../../shared/enums";
 import {changePage} from "../../../shared/redux";
-import {STATUS} from "../../../shared/enums/status.ts";
 
-export const CardsContainer = ({cards, error, status}: Omit<InitialsType, 'page'>) => {
+export const CardsContainer = ({cards, error, status}: ICardContainer) => {
     const dispatch = useAppDispatch();
-    const {page,total} = useSelector((state: RootState) => state.characters);
+    const {page,total} = useAppSelector((state) => state.characters);
     const handleChangePage = (_: ChangeEvent<unknown>, value: number) => {
         dispatch(changePage(value))
     }

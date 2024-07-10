@@ -7,7 +7,6 @@ type ArgsType = { page?: number, search?: string };
 const fetchCharacters: AsyncThunk<CharactersResultType, ArgsType, object> = createAsyncThunk(
     'characters/fetchCharacters',
     async (params: ArgsType) => {
-        // Convert ArgsType to Record<string, string>
         const queryParams: Record<string, string> = {};
         if (params.page !== undefined) queryParams.page = params.page.toString();
         if (params.search !== undefined) queryParams.search = params.search;

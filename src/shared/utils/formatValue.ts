@@ -1,6 +1,12 @@
 import {CardType} from "../types/types.ts";
 
-export  const formatValue = (key: keyof CardType, value: string | string[] | [],arrayFields:string[]): string => {
+interface IProps {
+    key:keyof CardType;
+    value: string | string[] | [],
+    arrayFields:string[]
+}
+
+export  const formatValue = ({key, value, arrayFields}:IProps): string => {
     if (arrayFields.includes(key)) {
         if (Array.isArray(value)) {
             return value.join(', ');

@@ -6,6 +6,13 @@ export type InitialsType = {
     searchString?:string | null,
     total?:number,
 }
+export interface ICardContainer  {
+    cards: CardType[],
+    status:  'idle' | 'loading' | 'succeeded' | 'failed'
+    error: string | null,
+    searchString?:string | null,
+    total?:number,
+}
 export type CharacterCardProps =  {
     id:string;
     name: string;

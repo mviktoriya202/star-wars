@@ -1,5 +1,5 @@
 import { configureStore,Tuple  } from '@reduxjs/toolkit'
-import { useDispatch } from 'react-redux'
+import {useDispatch, useSelector} from 'react-redux'
 import { thunk } from 'redux-thunk'
 import {charactersReducer,characterReducer} from "./slices";
 
@@ -13,7 +13,8 @@ const store = configureStore({
 })
 
 export type AppDispatch = typeof store.dispatch
-export const useAppDispatch: () => AppDispatch = useDispatch // Export a hook that can be reused to resolve types
+export const useAppDispatch: () => AppDispatch = useDispatch
+export const useAppSelector = useSelector.withTypes<RootState>()
 export type RootState = ReturnType<typeof store.getState>
 
 export default store

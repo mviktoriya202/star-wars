@@ -1,12 +1,12 @@
 import { createSlice } from '@reduxjs/toolkit';
 import {InitialsType} from "../../types/types.ts";
 import fetchCharacters from "../../../pages/homePage/api/fetchCharacters.ts";
-import {STATUS} from "../../enums/status.ts";
+import {STATUS} from "../../enums";
 
 
 const initialState = {
     cards: [],
-    searchString:null,
+    searchString:'',
     status: 'idle',
     error: null,
     page:1,
@@ -21,7 +21,7 @@ const charactersSlice = createSlice({
             state.page = action.payload
         },
         changeSearchString: (state, action) => {
-            state.searchString = action.payload
+            state.searchString = action.payload || ''
         }
     },
     extraReducers: (builder) => {

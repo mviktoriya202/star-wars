@@ -2,20 +2,19 @@ import React, {ChangeEvent} from 'react';
 import { InputBase } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
 import { styled } from '@mui/system';
-import {RootState, useAppDispatch} from "../../../redux/store.ts";
-import {useSelector} from "react-redux";
-import {changeSearchString,changePage} from "../../../redux/slices/charactersSlice.ts";
+import { useAppDispatch, useAppSelector} from "../../../redux/store.ts";
+import {changeSearchString,changePage} from "../../../redux";
 import {Link} from "react-router-dom";
 
 const SearchInput = styled(InputBase)`
     color: inherit;
     padding: 10px;
-    width: 200px; /* Set initial width */
+    width: 200px; 
 `;
 
 export const Header: React.FC = () => {
     const dispatch = useAppDispatch();
-    const { searchString } = useSelector((state: RootState) => state.characters);
+    const { searchString } = useAppSelector((state) => state.characters);
 
     const handleChange = (ev:ChangeEvent<HTMLInputElement>)=>{
         dispatch(changePage(1))
@@ -29,7 +28,7 @@ export const Header: React.FC = () => {
                      alt="Logo"/>
             </Link>
             <div className="flex">
-                <SearchInput value={searchString || ''} onChange={handleChange} placeholder="Search..." startAdornment={<SearchIcon />} />
+                <SearchInput value={searchString} onChange={handleChange} placeholder="Search..." startAdornment={<SearchIcon />} />
                 </div>
         </header>
     );

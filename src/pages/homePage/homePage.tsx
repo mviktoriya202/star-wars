@@ -1,24 +1,14 @@
-import {CardsContainer} from "../../widgets/cards/ui/CardsContainer.tsx";
+import {CardsContainer} from "../../widgets";
 import {useEffect, useState} from "react";
-import {RootState, useAppDispatch} from "../../shared/redux/store.ts";
-import { useSelector} from "react-redux";
+import {useAppDispatch, useAppSelector} from "../../shared/redux/store.ts";
 import fetchCharacters from "./api/fetchCharacters.ts";
 import {CardType} from "../../shared/types/types.ts";
-import {getCardsDataFromLocalStorage} from "../../shared/utils";
+import {getCardsDataFromLocalStorage,mergeCardsData} from "../../shared/utils";
 
 export const HomePage = ()=>{
     const dispatch = useAppDispatch();
-    const { cards, searchString, status, page, error } = useSelector((state: RootState) => state.characters);
+    const { cards, searchString, status, page, error } = useAppSelector((state) => state.characters);
     const [filteredCardsData, setFilteredCardsData] = useState<CardType[]>([]);
-
-
-    const mergeCardsData = (cards: CardType[], cardsData: CardType[]): CardType[] => {
-        const updatedCards = cards.map(card => {
-            const existingCardData = cardsData.find(data => data.id == card.id);
-            return existingCardData ? { ...card, ...existingCardData } : card;
-        });
-        return updatedCards;
-    };
 
     useEffect(() => {
         dispatch(fetchCharacters({page, search: searchString || ''}));

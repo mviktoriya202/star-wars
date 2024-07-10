@@ -1,7 +1,7 @@
 import {createSlice} from '@reduxjs/toolkit';
 import fetchCharacter from "../../../pages/infoPage/api/fetchCharacter.ts";
 import {CardType} from "../../types/types.ts";
-import {STATUS} from "../../enums/status.ts";
+import {STATUS} from "../../enums";
 
 type InitialTypes = {
     id: null | number,
